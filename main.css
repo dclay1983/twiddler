@@ -1,0 +1,218 @@
+/*
+  http://meyerweb.com/eric/tools/css/reset/ 
+  v2.0 | 20110126
+  License: none (public domain)
+*/
+/* 
+  ===========================================
+  Section
+  ===========================================
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* 
+  ===========================================
+  Custom styles
+  ===========================================
+*/
+
+body {
+  background: #e7f8fb;
+  color: #000;
+  font: 300 16px/18px "Lucida Bright","Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* 
+  ===========================================
+  Grid
+  ===========================================
+*/
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+.container,
+.grid {
+  margin: 0 auto;
+  width: 95%;
+}
+.grid-alt {
+  margin: 0;
+  width: 100%;
+  height: 20px;
+}
+.container {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.sidebar {
+  width: 20%;
+}
+.tweets {
+  width: 60%;
+}
+.user, .time {
+  width: 50%;
+  padding-right: 0;
+  padding-left: 0;
+}
+.time {
+  text-align: right;
+}
+.user, .time, .sidebar, .tweets {
+  display: inline-block;
+  vertical-align: top;
+}
+.grid, .sidebar, .tweets {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/*
+  ===========================================
+  Clearfix
+  ===========================================
+*/
+
+.group:before,
+.group:after {
+  content: "";
+  display: table;
+}
+.group:after {
+  clear: both;
+}
+.group {
+  clear: both;
+}
+
+/*
+  ===========================================
+  Rows
+  ===========================================
+*/
+.row,
+.row-alt {
+  min-width: 95%;
+}
+.row {
+  padding: 25px 0 25px 0;
+}
+.row-alt {
+  padding-top: 2px;
+}
+
+/*
+  ===========================================
+  Tweet
+  ===========================================
+*/
+
+.tweet {
+  border-bottom: 1px solid #c0d6e6;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.message {
+  border: 1px solid #c0d6e6;
+  border-radius: 5px 5px 5px 5px;
+  padding-right: 15px;
+  padding-left: 15px;
+  background: #e2f2f5;
+}
+.user, .time {
+  color: #c0d6e6;
+  font-size: 12px
+}
+
+/*
+  ===========================================
+  Header
+  ===========================================
+*/
+
+header {
+  background: #e7f8fb;
+  border-bottom: 1px solid #c0d6e6;
+}
+.focus {
+  color: #c0d6e6;
+  text-align: center;
+  font: 100 35px/22px "Baskerville Old Face";
+  letter-spacing: .5px;
+  padding: 15px 0 22px 0;
+  text-transform: uppercase;
+}
+.currentUser {
+  color: #c0d6e6;
+  float: right;
+  font: 100 20px/22px "Baskerville Old Face";
+  letter-spacing: .5px;
+  text-align: right;
+  padding: 15px 0 22px 0;
+}
+
+/* 
+  ===========================================
+  Links
+  ===========================================
+*/
+
+.logo a{
+  color: #c0d6e6;
+  float: left;
+  font: 100 35px/22px "Baskerville Old Face";
+  letter-spacing: .5px;
+  padding: 15px 0 22px 0;
+  text-transform: uppercase;
+}
+.logo a:hover {
+  color: #91bee4;
+}
+.user:hover {
+  color: #91bee4;
+}
