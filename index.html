@@ -1,25 +1,100 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" type="text/css" href="main.css">
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
   </head>
   <body>
+    <header class="container group">
+      <h1 class="logo">
+        <a href="javascript:getLinkTweets('home')">Twiddler</a>
+      </h1><!--
+    --><h2 class="currentUser">Visitor</h3><!--
+    --><h2 class="focus">Home</h2>
+    </header>
+    <section class="row">
+      <div class="grid">
+        <section class="sidebar nav">
+
+        </section><!--
+        --><section class="tweets">
+
+        </section><!--
+        --><section class="sidebar trands">
+
+        </section>
+      </div>
+    </section>
     <script>
+      $(document).ready( function() {
 
-      $(document).ready(function(){
-        var $body = $('body');
-        $body.html('');
+        //initialize header
+        var width = $(".logo a").css("width");
+        $(".currentUser").css("width", width);
 
-        var index = streams.home.length - 1;
-        while(index >= 0){
-          var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
-          $tweet.appendTo($body);
-          index -= 1;
+        // Keep header  and sidebars sticky
+        var $header = $('header');
+        var $sidebar = $('.sidebar');
+        $(window).scroll(function() {
+          var height = $(window).scrollTop();
+            if(height  > 100) {
+              $header.css({"position": "fixed"});
+              $sidebar.css({"position": "fixed"});
+            } else{
+              $header.css({"position": "relative"});
+              $sidebar.css({"position": "relative"});
+            }
+          });
+
+
+        var $tweets = $('.tweets');
+        var tweetTime = function(tweet) {
+          var hour = tweet.created_at.getHours();
+          var minute = tweet.created_at.getMinutes().toString().padStart(2,"0");
+          var pm = hour >= 12 ? "pm" : "am";
+          hour = hour % 12 || hour || 12;
+          return `${hour}:${minute} ${pm}`
+        };
+        var initializeGetTweets = function(){
+          var index = 0;
+          var key = "home";
+          return function (link, reset){
+            index = reset ? 0 : index;
+            key = link || key;
+            var linkedStreams = key === "home" ? streams.home : streams.users[key];
+            var lastIndex =  linkedStreams.length - 1;
+            while(index <= lastIndex){
+              var tweet = linkedStreams[index];
+              var $msg = $('<p class="message"></p>').text(tweet.message);
+              var uname = tweet.user;
+              var $user = $('<a class="user" href=#></a>').text(`@${tweet.user}`);
+              $user.attr("href", `javascript:getLinkTweets('${uname}')`);
+              var $time = $('<time class="time"></time>').attr("timedate", tweet.created_at);
+              $time.text(tweetTime(tweet));
+              var $grid = $('<div class="grid-alt"></div>').append($user);
+              var $tweetInfo = $(`<footer class="tweetInfo row-alt"></footer>`).append($grid);
+              $grid.append($time);
+              var $tweet = $(`<article class="tweet"></article>`).append($tweetInfo);
+              $tweet.append($msg);
+              $tweets.prepend($tweet);
+              index += 1;
+            };
+          };
+        };
+        var getTweets = initializeGetTweets()
+        var schedule;
+        window.scheduleGetTweets = function(link, reset) {
+          getTweets(link, reset);
+          schedule = setTimeout(scheduleGetTweets, 5000);
         }
-
+        window.getLinkTweets = function(link) {
+          clearTimeout(schedule);
+          $(".focus").text(link)
+          $tweets.empty();
+          scheduleGetTweets(link, true);
+        };
+        getLinkTweets("home");
       });
 
     </script>
