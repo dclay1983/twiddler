@@ -78,7 +78,7 @@ body {
 .container,
 .grid {
   margin: 0 auto;
-  width: 95%;
+  width: 100%;
 }
 .grid-alt {
   margin: 0;
@@ -94,6 +94,13 @@ body {
 }
 .tweets {
   width: 60%;
+  height: 100%;
+  overflow-y: auto;
+  border-right: 1px solid #c0d6e6;
+  border-left: 1px solid #c0d6e6;
+}
+.tweets::-webkit-scrollbar {
+  display: none;
 }
 .user, .time {
   width: 50%;
@@ -140,7 +147,6 @@ body {
   min-width: 95%;
 }
 .row {
-  padding: 25px 0 25px 0;
 }
 .row-alt {
   padding-top: 2px;
@@ -154,12 +160,11 @@ body {
 
 .tweet {
   border-bottom: 1px solid #c0d6e6;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-bottom: 7px;
 }
 .message {
   border: 1px solid #c0d6e6;
-  border-radius: 5px 5px 5px 5px;
+  border-radius: 5px;
   padding-right: 15px;
   padding-left: 15px;
   background: #e2f2f5;
@@ -202,17 +207,27 @@ header {
   ===========================================
 */
 
-.logo a{
+a {
   color: #c0d6e6;
+}
+a:hover {
+  color: #91bee4;
+}
+.logo a{
   float: left;
   font: 100 35px/22px "Baskerville Old Face";
   letter-spacing: .5px;
   padding: 15px 0 22px 0;
   text-transform: uppercase;
 }
-.logo a:hover {
-  color: #91bee4;
-}
-.user:hover {
-  color: #91bee4;
+
+/*
+  ===========================================
+  Navigation
+  ===========================================
+*/
+
+.nav {
+  display: block;
+  text-align: right;
 }
