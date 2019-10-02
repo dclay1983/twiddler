@@ -10,45 +10,85 @@
       <h1 class="logo">
         <a href="javascript:getLinkTweets('home')">Twiddler</a>
       </h1><!--
-    --><h2 class="currentUser">Visitor</h3><!--
+    --><h2 class="currentUser">
+        <a href=#>Visitor</a>
+      </h3><!--
     --><h2 class="focus">Home</h2>
     </header>
     <section class="row">
       <div class="grid">
-        <section class="sidebar nav">
+        <section class="sidebar">
+          <div class="nav">
+            <nav>
+              <a href="javascript:getLinkTweets('home')">Home</a><br>
+              <a href="javascript:getTrends()">#Trends</a><br>
+            </nav>
+            <form action="javascript:tweet()">
+            </form>
+          </div>
 
         </section><!--
         --><section class="tweets">
 
         </section><!--
-        --><section class="sidebar trands">
+        --><section class="sidebar trends">
 
         </section>
       </div>
     </section>
     <script>
       $(document).ready( function() {
+        // initialize visitor
+        window.visitor = "visitor";
+        $currentUser = $(".currentUser a");
+        $currentUser.attr("href", "javascript:signIn()")
+        window.signIn = function () {
+          // clearTimeout(schedule);
+          // $(".focus").text(link)
+          // $tweets.empty();
+          // var $signIn = $(`<article class="signIn"></article>`).append($tweetInfo);
+          // $tweet.append("<p>Please sign in.</p>")
+          // $tweet.append("<form action=CreateUser>");
+          //<form action="action_page.php" method="post">
+            //   <div class="container">
+            //     <label for="uname"><b>Username</b></label>
+            //     <input type="text" placeholder="Enter Username" name="uname" required>
+            //     <button type="submit">Login</button>
+            //     <label>
+            //       <input type="checkbox" checked="checked" name="remember"> Remember me
+            //     </label>
+            //   </div>
+            // </form>
+        }
 
         //initialize header
         var width = $(".logo a").css("width");
-        $(".currentUser").css("width", width);
+        $currentUser.css("width", width);
 
-        // Keep header  and sidebars sticky
         var $header = $('header');
-        var $sidebar = $('.sidebar');
-        $(window).scroll(function() {
-          var height = $(window).scrollTop();
-            if(height  > 100) {
-              $header.css({"position": "fixed"});
-              $sidebar.css({"position": "fixed"});
-            } else{
-              $header.css({"position": "relative"});
-              $sidebar.css({"position": "relative"});
-            }
-          });
-
-
+        var $row = $('.row')
+        var $window = $(window)
         var $tweets = $('.tweets');
+
+        // Depracated Sticky header in favor of scrollable tweet section
+        // $(window).scroll(function() {
+        //   var height = $(window).scrollTop();
+        //     if(height  > 1) {
+        //       $header.css({"position": "fixed"});
+        //     } else{
+        //       $header.css({"position": "relative"});
+        //     }
+        //   });
+        // Define tweets height relative to the window
+        var height = Math.floor($window.height() - ($header.outerHeight(true) + ($row.outerHeight(true) - $row.innerHeight())));
+        // Set height for overflow to work
+        $tweets.height(height);
+
+        // Temporary function for getTrends call.
+        window.getTrends = function () {
+          return;
+        }
+
         var tweetTime = function(tweet) {
           var hour = tweet.created_at.getHours();
           var minute = tweet.created_at.getMinutes().toString().padStart(2,"0");
@@ -82,7 +122,7 @@
             };
           };
         };
-        var getTweets = initializeGetTweets()
+        window.getTweets = initializeGetTweets()
         var schedule;
         window.scheduleGetTweets = function(link, reset) {
           getTweets(link, reset);
